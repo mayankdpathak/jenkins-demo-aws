@@ -9,3 +9,10 @@ variable "availability_zone" {
 variable "profile" {
   default = "~/.aws/config"
 }
+
+variable "access_key" {
+  description = "access key for subaccount"
+}
+
+variable "secret_key" {
+  description = "secret key for subaccount"
