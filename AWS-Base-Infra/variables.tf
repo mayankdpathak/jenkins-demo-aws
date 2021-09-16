@@ -10,9 +10,9 @@ variable "profile" {
   default = "~/.aws/config"
 }
 
-variable "access_key" {
+variable "ACCESS_KEY" {
   description = "access key for subaccount"
 }
 
-variable "secret_key" {
+variable "SECRET_KEY" {
   description = "secret key for subaccount"
