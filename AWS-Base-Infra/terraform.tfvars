@@ -1,0 +1,5 @@
+aws_profile = "default"
+aws_access_key = "AKIA3DJPOB2JCLXF7CPC"
+aws_secret_key = "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"
+aws_region = "ap-south-1"
+availability_zone = "ap-south-1a"
