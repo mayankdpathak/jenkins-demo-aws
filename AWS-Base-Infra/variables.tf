@@ -11,9 +11,8 @@ variable "profile" {
 }
 
 variable "access_key" {
-  aws_access_key_id = "~/.aws/credentials"
+  description = "access key for subaccount"
 }
 
 variable "secret_key" {
-  aws_secret_access_key = "~/.aws/credentials"
-}
+  description = "secret key for subaccount"
