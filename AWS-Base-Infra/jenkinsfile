@@ -16,7 +16,7 @@ pipeline {
 		
     }
 	
-	Use profile information from C:/Users/Zeus/.aws/config:
+	Use profile information from ~/.aws/config:
 	withAWS(profile:'default') {
     // Profile Info
 	}
