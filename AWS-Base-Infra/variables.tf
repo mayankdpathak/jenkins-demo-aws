@@ -11,9 +11,9 @@ variable "profile" {
 }
 
 variable "access_key" {
-  default = "$ACCESS_KEY"
+  aws_access_key_id = "~/.aws/credentials"
 }
 
 variable "secret_key" {
-  default = "$SECRET_KEY"
+  aws_secret_access_key = "~/.aws/credentials"
 }
