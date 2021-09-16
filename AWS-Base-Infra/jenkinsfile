@@ -15,8 +15,7 @@ pipeline {
     }
 	
 	options {
-	withAWS(profile:'myProfile')
-	withAWS(region:'ap-south-1'
+	withAWS(profile:'myProfile', region:'ap-south-1')
 	}
     stages {
 	
