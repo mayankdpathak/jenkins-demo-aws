@@ -16,9 +16,11 @@ pipeline {
 		
     }
 	
-	options {
-	withAWS(profile:'myProfile', region:'ap-south-1')
+	Use profile information from C:/Users/Zeus/.aws/config:
+	withAWS(profile:'default') {
+    // Profile Info
 	}
+	
     stages {
 	
 		stage('checkout') {
@@ -51,7 +53,7 @@ pipeline {
                         } catch (err) {
                             sh "terraform workspace select ${params.WORKSPACE}"
                         }
-						sh "terraform plan -var 'access_key=$ACCESS_KEY' -var 'secret_key=$SECRET_KEY' -var profile=$myProfile \
+						sh "terraform plan -var 'access_key=$ACCESS_KEY' -var 'secret_key=$SECRET_KEY' -var 'profile=default' \
                         -out terraform.tfplan;echo \$? > status"
                         stash name: "terraform-plan", includes: "terraform.tfplan"
                     }
