@@ -16,10 +16,9 @@ pipeline {
 		
     }
 	
-	Use profile information from ~/.aws/config:
-	withAWS(profile:'default') {
-    // Profile Info
-	}
+	options {
+			withAWS(profile:'default', region:'ap-south-1')
+			}
 	
     stages {
 	
