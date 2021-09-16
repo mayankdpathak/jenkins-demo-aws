@@ -1,5 +1,4 @@
 provider "aws" {
-  profile = "~/.aws/config"
+  profile = "default"
   region  = "ap-south-1"
-  
 }

@@ -13,6 +13,11 @@ pipeline {
         ACCESS_KEY = credentials('AWS_ACCESS_KEY_ID')
         SECRET_KEY = credentials('AWS_SECRET_ACCESS_KEY')
     }
+	
+	options {
+	withAWS(profile:'myProfile')
+	withAWS(region:'ap-south-1'
+	}
     stages {
 	
 		stage('checkout') {
@@ -45,9 +50,7 @@ pipeline {
                         } catch (err) {
                             sh "terraform workspace select ${params.WORKSPACE}"
                         }
-						sh 'printenv'
-						sh "echo $ACCESS_KEY"
-						sh "terraform plan -var 'access_key=$ACCESS_KEY' -var 'secret_key=$SECRET_KEY' \
+						sh "terraform plan -var 'access_key=$ACCESS_KEY' -var 'secret_key=$SECRET_KEY' -var '' \
                         -out terraform.tfplan;echo \$? > status"
                         stash name: "terraform-plan", includes: "terraform.tfplan"
                     }
