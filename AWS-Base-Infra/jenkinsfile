@@ -54,7 +54,7 @@ pipeline {
                         } catch (err) {
                             sh "terraform workspace select ${params.WORKSPACE}"
                         }
-						sh "terraform plan input=false -out terraform.tfplan"
+						sh "terraform plan -input=false -out tfplan"
 						sh "terraform show -no-color tfplan > tfplan.txt"
                     }
                 }
