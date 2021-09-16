@@ -1,0 +1,2 @@
+﻿C:\ProgramData\chocolatey\lib\terraform\tools\terraform.exe
+
