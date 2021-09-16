@@ -54,7 +54,7 @@ pipeline {
                         } catch (err) {
                             sh "terraform workspace select ${params.WORKSPACE}"
                         }
-					sh "terraform plan -input=false -var 'access_key=$ACCESS_KEY' -var 'secret_key=$SECRET_KEY' -out tfplan"
+					sh "terraform plan -input=true -out tfplan"
 					sh "terraform show -no-color tfplan > tfplan.txt"
                     }
                 }
