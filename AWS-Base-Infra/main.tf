@@ -28,7 +28,7 @@ resource "aws_security_group" "vpc-sg-tf" {
 resource "aws_instance" "myinstance-web1" {
   availability_zone = var.availability_zone
   ami               = "ami-00bf4ae5a7909786c"
-  key_name          = var.aws_key_name
+#  key_name          = var.aws_key_name
   instance_type     = "t2.micro"
   subnet_id         = aws_subnet.My-VPC-Subnet.id
 
@@ -37,7 +37,7 @@ resource "aws_instance" "myinstance-web1" {
 resource "aws_instance" "myinstance-web2" {
   availability_zone = var.availability_zone
   ami               = "ami-00bf4ae5a7909786c"
-  key_name          = var.aws_key_name
+#  key_name          = var.aws_key_name
   instance_type     = "t2.micro"
   subnet_id         = aws_subnet.My-VPC-Subnet.id
 

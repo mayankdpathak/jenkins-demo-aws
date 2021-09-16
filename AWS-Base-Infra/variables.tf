@@ -10,6 +10,3 @@ variable "profile" {
   description = "AWS credentials profile you want to use"
 }
 
-variable "aws_key_path" {}
-variable "aws_key_name" {}
-
