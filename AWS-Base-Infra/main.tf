@@ -1,6 +1,6 @@
 provider "aws" {
-  profile = "default"
-  region  = "ap-south-1"
+  profile = "${var.TF_VAR_profile}"
+  region  = "${var.TF_VAR_region}"
   access_key = "${var.TF_VAR_aws_access_key}"
   secret_key = "${var.TF_VAR_aws_secret_key}"
 }
