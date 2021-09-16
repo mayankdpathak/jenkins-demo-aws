@@ -48,18 +48,12 @@ pipeline {
         stage('TerraformPlan'){
             steps {
                 dir('jenkins-terraform-pipeline/ec2_pipeline/AWS-Base-Infra'){
-                    script {
-                        try {
-                            sh "terraform workspace new ${params.WORKSPACE}"
-                        } catch (err) {
-                            sh "terraform workspace select ${params.WORKSPACE}"
-                        }
-					sh "terraform plan -input=true -out tfplan"
+                    sh "terraform plan -input=true -out tfplan"
 					sh "terraform show -no-color tfplan > tfplan.txt"
                     }
                 }
             }
-        }
+        
         stage('TerraformApply'){
             steps {
                 script{
