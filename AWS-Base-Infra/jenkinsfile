@@ -18,7 +18,7 @@ pipeline {
     }
 	
 	options {
-			withAWS(profile:'default', region:'ap-south-1', withAWS(credentials:'IDofAwsCredentials'))
+			withAWS(profile:'default', region:'ap-south-1', credentials:'IDofAwsCredentials')
 			}
 	
     stages {
