@@ -1,5 +1,0 @@
-TF_VAR_aws_profile = "default"
-TF_VAR_aws_access_key = "AKIA3DJPOB2JCLXF7CPC"
-TF_VAR_aws_secret_key = "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"
-TF_VAR_aws_region = "ap-south-1"
-TF_VAR_availability_zone = "ap-south-1a"

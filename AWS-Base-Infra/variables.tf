@@ -1,21 +1,19 @@
-variable "TF_VAR_region" {
+variable "region" {
   default = "ap-south-1"
 }
 
-variable "TF_VAR_availability_zone" {
+variable "availability_zone" {
   default = "ap-south-1a"
 }
 
-variable "TF_VAR_profile" {
-  default = "~/.aws/config"
+variable "profile" {
+  description = "AWS credentials profile you want to use"
 }
 
-variable "TF_VAR_aws_access_key" {
-  description = "access key for subaccount"
-  default = "AKIA3DJPOB2JCLXF7CPC"
+variable "access_key" {
+  default = "$ACCESS_KEY"
 }
 
-variable "TF_VAR_aws_secret_key" {
-  description = "secret key for subaccount"
-  default = "rABRcpfuBSL3E96CjJD6O7ce2n8tcKNzu13LWnWg"
+variable "secret_key" {
+  default = "$SECRET_KEY"
 }
