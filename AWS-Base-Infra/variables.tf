@@ -8,6 +8,7 @@ variable "availability_zone" {
 
 variable "profile" {
   description = "AWS credentials profile you want to use"
+  default = "$AWS_PROFILE"
 }
 
 variable "access_key" {
