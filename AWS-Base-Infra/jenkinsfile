@@ -54,8 +54,8 @@ pipeline {
                         } catch (err) {
                             sh "terraform workspace select ${params.WORKSPACE}"
                         }
-						sh "terraform plan -input=true -out tfplan.plan"
-                        stash name: "terraform-plan", includes: "tfplan.plan"
+						sh "terraform plan -input=true -out terraform.tfplan"
+                        stash name: "terraform-plan", includes: "terraform.tfplan"
                     }
                 }
             }
@@ -75,7 +75,7 @@ pipeline {
                     if(apply){
                         dir('jenkins-terraform-pipeline/ec2_pipeline/'){
                             unstash "terraform-plan"
-                            sh 'terraform apply -auto-approve -input=false' 
+                            sh 'terraform apply terraform.tfplan -input=false' 
                         }
                     }
                 }
