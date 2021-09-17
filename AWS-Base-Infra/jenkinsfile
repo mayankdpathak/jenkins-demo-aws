@@ -55,7 +55,7 @@ pipeline {
                             sh "terraform workspace select ${params.WORKSPACE}"
                         }
 						sh "terraform plan -input=true -out tfplan" \
-                        -out terraform.tfplan;echo \$? > status"
+                        -out terraform.tfplan"
                         stash name: "terraform-plan", includes: "terraform.tfplan"
                     }
                 }
