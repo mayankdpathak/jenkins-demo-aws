@@ -54,25 +54,28 @@ pipeline {
                 }
             }
         
-        stage('TerraformApply'){
+        stage('TerraformApproval') {
+           when {
+               not {
+                   equals expected: true, actual: params.autoApprove
+               }
+           }
+
+           steps {
+               script {
+                    def plan = readFile 'jenkins-terraform-pipeline/ec2_pipeline/AWS-Base-Infra/tfplan.txt'
+                    input message: "Do you want to apply the plan?",
+                    parameters: [text(name: 'Plan', description: 'Please review the Plan', defaultValue: Plan)]
+               }
+           }
+       }
+
+        stage('TerraformApply') {
             steps {
-                script{
-                    def apply = false
-                    try {
-                        input message: 'Can you please confirm the apply', ok: 'Ready to Apply the Config'
-                        apply = true
-                    } catch (err) {
-                        apply = false
-                         currentBuild.result = 'UNSTABLE'
-                    }
-                    if(apply){
-                        dir('jenkins-terraform-pipeline/ec2_pipeline/AWS-Base-Infra'){
-                            unstash "terraform-plan"
-                            sh 'terraform apply tfplan'
-                        }
-                    }
-                }
+                dir('jenkins-terraform-pipeline/ec2_pipeline/AWS-Base-Infra'){
+                sh "terraform apply -input=false tfplan"
             }
         }
-    }
+		}
+	}
 }
