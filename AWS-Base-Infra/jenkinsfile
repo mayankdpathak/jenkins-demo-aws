@@ -37,7 +37,7 @@ pipeline {
 		stage('TerraformInit'){
 			steps {
 				dir('jenkins-terraform-pipeline/ec2_pipeline/AWS-Base-Infra'){
-					sh "terraform init -input=false"
+					sh "terraform init -upgrade -input=false"
 					sh "echo \$PWD"
 					sh "whoami"
 					
