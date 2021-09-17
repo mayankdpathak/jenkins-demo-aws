@@ -68,7 +68,7 @@ pipeline {
                     if(apply){
                         dir('jenkins-terraform-pipeline/ec2_pipeline/AWS-Base-Infra'){
                             unstash "terraform-plan"
-                            sh 'terraform apply terraform.tfplan'
+                            sh 'terraform apply tfplan'
                         }
                     }
                 }
