@@ -14,6 +14,7 @@ pipeline {
         SECRET_KEY = credentials('AWS_SECRET_ACCESS_KEY')
 		AWS_DEFAULT_REGION = 'ap-south-1'
 		AWS_PROFILE = '~/.aws/config'
+		TF_LOG = trace
 		
     }
 	
@@ -26,7 +27,7 @@ pipeline {
 		stage('checkout') {
 			steps {
 				script{
-					dir("ec2") 
+					dir("") 
 					{
                      git "https://github.com/mayankdpathak/jenkins-demo-aws.git"
                     }
@@ -36,7 +37,7 @@ pipeline {
 			
 		stage('TerraformInit'){
 			steps {
-				dir('ec2/AWS-Base-Infra'){
+				dir('AWS-Base-Infra'){
 					sh "terraform init -upgrade -input=false"
 					sh "echo \$PWD"
 					sh "whoami"
@@ -47,15 +48,15 @@ pipeline {
 
         stage('TerraformPlan'){
             steps {
-                dir('ec2/AWS-Base-Infra'){
+                dir('AWS-Base-Infra'){
 					script {
                         try {
                             sh "terraform workspace new ${params.WORKSPACE}"
                         } catch (err) {
                             sh "terraform workspace select ${params.WORKSPACE}"
                         }
-						sh "terraform plan -input=false -out terraform.tfplan"
-                        stash name: "terraform-plan", includes: "terraform.tfplan"
+						sh "terraform plan -input=false -out tfplan.plan"
+                        stash name: "terraform-plan", includes: "tfplan.plan"
                     }
                 }
             }
@@ -73,9 +74,9 @@ pipeline {
                          currentBuild.result = 'UNSTABLE'
                     }
                     if(apply){
-                        dir('ec2'){
+                        dir(''){
                             unstash "terraform-plan"
-                            sh 'terraform apply -auto-approve' 
+                            sh 'terraform apply tfplan.plan' 
                         }
                     }
                 }
