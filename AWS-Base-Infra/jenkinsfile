@@ -27,7 +27,7 @@ pipeline {
 		stage('checkout') {
 			steps {
 				script{
-					dir("") 
+					dir("ec2") 
 					{
                      git "https://github.com/mayankdpathak/jenkins-demo-aws.git"
                     }
@@ -37,7 +37,7 @@ pipeline {
 			
 		stage('TerraformInit'){
 			steps {
-				dir('AWS-Base-Infra'){
+				dir('ec2/AWS-Base-Infra'){
 					sh "terraform init -upgrade -input=false"
 					sh "echo \$PWD"
 					sh "whoami"
@@ -48,15 +48,15 @@ pipeline {
 
         stage('TerraformPlan'){
             steps {
-                dir('AWS-Base-Infra'){
+                dir('ec2/AWS-Base-Infra'){
 					script {
                         try {
                             sh "terraform workspace new ${params.WORKSPACE}"
                         } catch (err) {
                             sh "terraform workspace select ${params.WORKSPACE}"
                         }
-						sh "terraform plan -input=false -out tfplan.plan"
-                        stash name: "terraform-plan", includes: "tfplan.plan"
+						sh "terraform plan -input=false -out tfplan"
+                        stash name: "terraform-plan", includes: "tfplan"
                     }
                 }
             }
@@ -74,9 +74,9 @@ pipeline {
                          currentBuild.result = 'UNSTABLE'
                     }
                     if(apply){
-                        dir(''){
+                        dir('ec2/AWS-Base-Infra'){
                             unstash "terraform-plan"
-                            sh 'terraform apply tfplan.plan' 
+                            sh 'terraform apply tfplan' 
                         }
                     }
                 }
