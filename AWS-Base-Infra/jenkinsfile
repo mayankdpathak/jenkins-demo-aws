@@ -76,7 +76,7 @@ pipeline {
                     if(apply){
                         dir('ec2/AWS-Base-Infra'){
                             unstash "terraform-plan"
-                            sh 'terraform apply tfplan' 
+                            sh 'terraform apply -destroy tfplan' 
                         }
                     }
                 }
